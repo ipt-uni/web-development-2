@@ -33,5 +33,9 @@ namespace lab2.Data.Model
         /// </summary>
         [Display(Name = "Semester")]
         public int Semester { get; set; }
+
+        // Relations
+
+        public ICollection<Professor> Professors { get; set; } = new List<Professor>();
     }
 }
