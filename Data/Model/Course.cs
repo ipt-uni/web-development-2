@@ -18,9 +18,9 @@ namespace lab2.Data.Model
         /// <summary>
         /// Name of the Subject
         /// </summary>
-        [Required(ErrorMessage = "o {0} é de preenchimento obrigatório")]
+        [Required(ErrorMessage = "The {0} is required")]
         [StringLength(30)]
-        [Display(Name = "Nome da Disciplina")]
+        [Display(Name = "Subject Name")]
         public string Name { get; set; } = "";
 
         /// <summary>
@@ -43,7 +43,7 @@ namespace lab2.Data.Model
         /// FK for the course to which the subject belongs
         /// </summary>
         [ForeignKey(nameof(Degree))]
-        [Display(Name = "Curso")]
+        [Display(Name = "Course")]
         public int DegreeFK { get; set; } // FK for the Degree
 
         /// <summary>

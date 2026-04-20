@@ -14,7 +14,7 @@ namespace lab2.Data.Model
         /// <summary>
         /// Date when the student enrolls in the subject
         /// </summary>
-        [Display(Name = "Data Inscrição")]
+        [Display(Name = "Enrollment Date")]
         [DataType(DataType.Date)]
         public DateTime RegistrationDate { get; set; } = DateTime.Now.Date;
 
@@ -24,7 +24,7 @@ namespace lab2.Data.Model
         /// FK for the student who enrolls in the subject
         /// </summary>
         [ForeignKey(nameof(Student))] // this annotation informs EF that the 'StudentFK' attribute is an FK together with the 'Student' attribute
-        [Display(Name = "Estudante")]
+        [Display(Name = "Student")]
         public int StudentFK { get; set; }
 
         /// <summary>
@@ -38,7 +38,7 @@ namespace lab2.Data.Model
         /// FK for the subject in which the student enrolls
         /// </summary>
         [ForeignKey(nameof(Course))] // this annotation informs EF that the 'CourseFK' attribute is an FK together with the 'Course' attribute
-        [Display(Name = "Disciplina")]
+        [Display(Name = "Subject")]
         public int CourseFK { get; set; }
 
         /// <summary>

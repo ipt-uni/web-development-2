@@ -11,8 +11,9 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form method="post">
+        <form method="post" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+			@* When you have some errors you will see it here in the red text.*@
             <div class="form-group">
                 <label asp-for="Degree.Name" class="control-label"></label>
                 <input asp-for="Degree.Name" class="form-control" />
@@ -20,8 +21,11 @@
             </div>
             <div class="form-group">
                 <label asp-for="Degree.Logotype" class="control-label"></label>
-                <input asp-for="Degree.Logotype" class="form-control" />
-                <span asp-validation-for="Degree.Logotype" class="text-danger"></span>
+                <input asp-for="ImageLogo" 
+						type="file"
+						accept=".jpg,.png,.jpeg"
+						class="form-control"/>
+                <span asp-validation-for="ImageLogo" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />

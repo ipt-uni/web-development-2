@@ -13,15 +13,15 @@ namespace lab2.Data.Model
         /// <summary>
         /// name of the Course
         /// </summary>
-        [Required(ErrorMessage = "O {0} é de preenchimento obrigatório!")]
+        [Required(ErrorMessage = "The {0} is required!")]
         [StringLength(100)]
-        [Display(Name = "Curso")] // defines the name to appear on screen
+        [Display(Name = "Course")] // defines the name to appear on screen
         public string Name { get; set; } = "";
 
         /// <summary>
         /// name of the file containing the Degree logotype
         /// </summary>
-        [Display(Name = "Logótipo")] // defines the name to appear on screen
+        [Display(Name = "Logo")] // defines the name to appear on screen
         [StringLength(50)]
         public string? Logotype { get; set; } // the '?' will make the attribute optional
 

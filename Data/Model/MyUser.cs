@@ -15,14 +15,14 @@ namespace lab2.Data.Model
         /// Nome do utilizador
         /// </summary>
         [StringLength(50)]
-        [Required(ErrorMessage = "O {0} é de preenchimento obrigatório.")]
-        [Display(Name = "Nome Completo")]
+        [Required(ErrorMessage = "The {0} is required.")]
+        [Display(Name = "Full Name")]
         public string Name { get; set; } = "";
 
         /// <summary>
         /// Data de nascimento
         /// </summary>
-        [Display(Name = "Data Nascimento")]
+        [Display(Name = "Birth Date")]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         [DataType(DataType.Date)]
         public DateOnly BirthDate { get; set; }
@@ -30,7 +30,7 @@ namespace lab2.Data.Model
         /// <summary>
         /// User's mobile phone,
         /// </summary>
-        [Display(Name = "Telemóvel")]
+        [Display(Name = "Mobile Phone")]
         [StringLength(19)]
         public string? CellPhone { get; set; }
 

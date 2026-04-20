@@ -27,7 +27,7 @@ namespace lab2.Data.Model
         /// <summary>
         /// Student enrollment date
         /// </summary>
-        [Display(Name = "Data Matrícula")]
+        [Display(Name = "Enrollment Date")]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         [DataType(DataType.Date)]
         public DateTime RegistrationDate { get; set; } = DateTime.Now;
@@ -42,7 +42,7 @@ namespace lab2.Data.Model
         /// FK para o Degree
         /// </summary>
         [ForeignKey(nameof(Degree))] // this annotation informs EF that the 'DegreeFK' attribute is an FK together with the 'Degree' attribute
-        [Display(Name = "Curso")]
+        [Display(Name = "Course")]
         public int DegreeFK { get; set; } // FK for the Degree
 
         [ValidateNever] // informs EF not to validate this attribute
