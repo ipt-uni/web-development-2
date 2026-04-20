@@ -1,44 +1,52 @@
+﻿using Microsoft.EntityFrameworkCore;
+
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using Microsoft.EntityFrameworkCore;
+using System.Runtime.CompilerServices;
 
-namespace lab2.Data.Model
-{
-    /// <summary>
-    /// Links students to courses. Composite key prevents duplicate registrations.
-    /// </summary>
-    [PrimaryKey(nameof(StudentFK), nameof(CourseFK))]
-    public class Registration
-    {
-        /// <summary>
-        /// Date and time of registration.
-        /// </summary>
-        public DateTime RegistrationDate { get; set; }
+namespace Aulas.Data.Model {
 
-        /// <summary>
-        /// Foreign key to Student entity.
-        /// </summary>
-        [ForeignKey(nameof(Student))]
-        public int StudentFK { get; set; }
+   /// <summary>
+   /// Class of the relationship between students and subjects
+   /// </summary>
+   [PrimaryKey(nameof(StudentFK), nameof(CourseFK))]  // Composite PK (EF Core >= 7)
+   public class Registration {
 
-        /// <summary>
-        /// Navigation property to Student.
-        /// </summary>
-        public Student student { get; set; } = null!;
+      /// <summary>
+      /// Date when the student enrolls in the subject
+      /// </summary>
+      [Display(Name = "Data Inscrição")]
+      [DataType(DataType.Date)]
+      public DateTime RegistrationDate { get; set; } = DateTime.Now.Date;
 
-        /// <summary>
-        /// Foreign key to Course entity.
-        /// </summary>
-        [ForeignKey(nameof(Course))]
-        public int CourseFK { get; set; }
+      // FK for Student
+      //   [Key, Column(Order = 1)] ----> valid for EF <=6
+      /// <summary>
+      /// FK for the student who enrolls in the subject
+      /// </summary>
+      [ForeignKey(nameof(Student))] // this annotation informs EF that the 'StudentFK' attribute is an FK together with the 'Student' attribute
+      [Display(Name = "Estudante")]
+      public int StudentFK { get; set; }
+      /// <summary>
+      /// FK for the student who enrolls in the subject
+      /// </summary>
+      public Student Student { get; set; } = null!;
 
-        /// <summary>
-        /// Navigation property to Course.
-        /// </summary>
-        public Course Course { get; set; } = null!;
-    }
+
+      // FK for Course
+      //   [Key, Column(Order = 2)] ----> valid for EF <=6
+      /// <summary>
+      /// FK for the subject in which the student enrolls
+      /// </summary>
+      [ForeignKey(nameof(Course))] // this annotation informs EF that the 'CourseFK' attribute is an FK together with the 'Course' attribute
+      [Display(Name = "Disciplina")]
+      public int CourseFK { get; set; }
+      /// <summary>
+      /// FK for the subject in which the student enrolls
+      /// </summary>
+      public Course Course { get; set; } = null!;
+
+
+
+   }
 }
-
-/*
- * before [Key] meant primary key.
- * but new entity framework version requires the [PrimaryKey] attribute to function.
- */

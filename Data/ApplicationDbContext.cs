@@ -1,18 +1,21 @@
-﻿using lab2.Data.Model;
+﻿using Aulas.Data.Model;
+
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
-namespace lab2.Data;
+namespace Aulas.Data {
+   public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options):IdentityDbContext(options) {
 
-public class ApplicationDbContext : IdentityDbContext
-{
-    public DbSet<Course> Courses { get; set; } = null!;
-    public DbSet<Degree> Degrees { get; set; } = null!;
-    public DbSet<Registration> Registrations { get; set; } = null!;
-    public DbSet<MyUser> MyUsers { get; set; } = null!;
-    public DbSet<Student> Students { get; set; } = null!;
-    public DbSet<Professor> Professors { get; set; } = null!;
 
-    public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
-        : base(options) { }
+      /* ********************************************
+       * specify the database tables
+       * ******************************************** */
+      public DbSet<MyUser> AppUsers { get; set; }
+      public DbSet<Student> Students { get; set; }
+      public DbSet<Professor> Professors { get; set; }
+      public DbSet<Course> Courses { get; set; }
+      public DbSet<Degree> Degrees { get; set; }
+      public DbSet<Registration> Registrations { get; set; }
+
+   }
 }

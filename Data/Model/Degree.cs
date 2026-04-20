@@ -1,31 +1,46 @@
-using System.ComponentModel.DataAnnotations;
-using Microsoft.EntityFrameworkCore;
+﻿using System.ComponentModel.DataAnnotations;
 
-namespace lab2.Data.Model
-{
-    /// <summary>
-    /// Represents an academic degree program (e.g., Bachelor's, Master's).
-    /// </summary>
-    [PrimaryKey(nameof(Id))]
-    public class Degree
-    {
-        /// <summary>
-        /// Unique identifier for the degree. Auto-generated.
-        /// </summary>
-        public int Id { get; set; }
+namespace Aulas.Data.Model {
 
-        /// <summary>
-        /// Official name of the degree. Maximum 100 characters.
-        /// </summary>
-        [StringLength(100)]
-        [Display(Name = "Degree Name")]
-        public String Name { get; set; } = "";
+   /// <summary>
+   /// Curso
+   /// </summary>
+   public class Degree {
 
-        /// <summary>
-        /// File extension of degree logo image (png, jpg, svg). Nullable.
-        /// </summary>
-        [StringLength(50)]
-        [Display(Name = "Logo Type")]
-        public String? LogoType { get; set; } = null;
-    }
+      [Key] // PK
+      public int Id { get; set; }
+
+/// <summary>
+      /// name of the Course
+      /// </summary>
+      [Required(ErrorMessage = "O {0} é de preenchimento obrigatório!")]
+      [StringLength(100)]
+      [Display(Name = "Curso")] // defines the name to appear on screen
+      public string Name { get; set; } = "";
+
+/// <summary>
+      /// name of the file containing the Degree logotype
+      /// </summary>
+      [Display(Name = "Logótipo")] // defines the name to appear on screen
+      [StringLength(50)]
+      public string? Logotype { get; set; } // the '?' will make the attribute optional
+
+
+/* ****************************************
+        * Building the Relationships
+        * *************************************** */
+
+       // relationship 1-N
+
+/// <summary>
+      /// List of subjects of the course
+      /// </summary>
+      public ICollection<Course> CoursesList { get; set; } = [];
+
+/// <summary>
+      /// list of students enrolled in the course
+      /// </summary>
+      public ICollection<Student> StudentsList { get; set; } = [];
+
+   }
 }
