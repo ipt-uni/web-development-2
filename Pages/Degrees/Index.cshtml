@@ -29,7 +29,12 @@
                 @Html.DisplayFor(modelItem => item.Name)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Logotype)
+               @* @Html.DisplayFor(modelItem => item.Logotype) *@
+			   <img src="~/images/@item.Logotype"
+					alt="logotype of the degree @item.Name"
+					title="Logotype of the degree @item.Name"
+					style="max-width:100px;"/>
+				<a href = "~/images/@item.Logotype">Link</a>
             </td>
             <td>
                 <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
