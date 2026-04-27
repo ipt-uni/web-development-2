@@ -32,6 +32,10 @@ namespace lab2.Data.Model
         /// </summary>
         [Display(Name = "Mobile Phone")]
         [StringLength(19)]
+        [RegularExpression(
+            @"((\+)|(00)[0-9]{2,5})?[0-9]{4,13}",
+            ErrorMessage = "Please enter a valid phone number"
+        )]
         public string? CellPhone { get; set; }
 
         /// <summary>
