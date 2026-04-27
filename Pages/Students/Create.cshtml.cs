@@ -2,11 +2,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using lab2.Data;
+using lab2.Data.Model;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using lab2.Data;
-using lab2.Data.Model;
 
 namespace lab2.Pages.Students
 {
@@ -21,7 +21,12 @@ namespace lab2.Pages.Students
 
         public IActionResult OnGet()
         {
-        ViewData["DegreeFK"] = new SelectList(_context.Degrees, "Id", "Name");
+            Console.WriteLine("OnGet");
+            ViewData["DegreeFK"] = new SelectList(
+                _context.Degrees.OrderBy(d => d.Name),
+                "Id",
+                "Name"
+            );
             return Page();
         }
 
@@ -31,14 +36,20 @@ namespace lab2.Pages.Students
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
         public async Task<IActionResult> OnPostAsync()
         {
+            Console.WriteLine("OnPostAsync");
             if (!ModelState.IsValid)
             {
+                Console.WriteLine("OnPostAsync ModelState Invalid");
+                ViewData["DegreeFK"] = new SelectList(
+                    _context.Degrees.OrderBy(d => d.Name),
+                    "Id",
+                    "Name"
+                );
                 return Page();
             }
 
             _context.Students.Add(Student);
             await _context.SaveChangesAsync();
-
             return RedirectToPage("./Index");
         }
     }
