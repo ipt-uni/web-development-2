@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 using lab2.Data;
@@ -47,9 +48,16 @@ namespace lab2.Pages.Students
                 );
                 return Page();
             }
-
-            _context.Students.Add(Student);
-            await _context.SaveChangesAsync();
+            Student.TuitionFee = Convert.ToDecimal(
+                Student.TuitionFeeAux.Replace(",", "."),
+                new CultureInfo("en-US")
+            );
+            try
+            {
+                _context.Students.Add(Student);
+                await _context.SaveChangesAsync();
+            }
+            catch (Exception) { }
             return RedirectToPage("./Index");
         }
     }
