@@ -18,10 +18,20 @@ namespace lab2.Data.Model
         /// </summary>
         public int StudentNumber { get; set; }
 
+        [Display(Name = "TuitionFee")]
+        [Required(ErrorMessage = "Tuition Fee {0} is necessary")]
+        [NotMapped]
+        [RegularExpression(
+            "[0-9]{1,7}([.,])?[0-9]{1,2}",
+            ErrorMessage = "Yuu have to right correctly"
+        )]
+        [StringLength(10)]
+        public string TuitionFeeAux { get; set; } = "";
+
         /// <summary>
         /// Tuition fee paid by the Student at the time of enrollment in the Degree
         /// </summary>
-        // [Precision(9, 2)] // informs EF to create the attribute with 9 digits and 2, as decimal part
+        [Precision(9, 2)] // informs EF to create the attribute with 9 digits and 2, as decimal part
         public decimal TuitionFee { get; set; }
 
         /// <summary>
