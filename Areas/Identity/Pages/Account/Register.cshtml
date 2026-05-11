@@ -31,7 +31,33 @@ ViewData["Title"] = "Register";
 		</form>
 	</div>
 	<div class="col-md-6 col-md-offset-2">
-		Hey how are you
+		<div class="form-floating mb-3">
+			<input asp-for="Input.Student.Name" class="form-control" autocomplete="username" aria-required="true" placeholder="Name">
+			<label asp-for="Input.Student.Name">Name </label>
+			<span asp-validation-for="Input.Student.Name" class="text-danger"></span>
+		</div>
+		<div class="form-floating mb-3">
+			<input asp-for="Input.Student.BirthDate" class="form-control" autocomplete="username" aria-required="true" placeholder="BirthDate">
+			<label asp-for="Input.Student.BirthDate">birth date </label>
+			<span asp-validation-for="Input.Student.BirthDate" class="text-danger"></span>
+		</div>
+		<div class="form-floating mb-3">
+			<input asp-for="Input.Student.CellPhone" class="form-control" autocomplete="username" aria-required="true" placeholder="CellPhone">
+			<label asp-for="Input.Student.CellPhone">phone</label>
+			<span asp-validation-for="Input.Student.CellPhone" class="text-danger"></span>
+		</div>
+		<div class="form-floating mb-3">
+			<input asp-for="Input.Student.TuitionFeeAux" class="form-control" autocomplete="username" aria-required="true" placeholder="TuitionFeeAux">
+			<label asp-for="Input.Student.TuitionFeeAux">tuition fee</label>
+			<span asp-validation-for="Input.Student.TuitionFeeAux" class="text-danger"></span>
+		</div>
+		<div class="form-floating mb-3">
+			<select asp-for="Input.Student.DegreeFK" class="form-control" asp-items = "ViewBag.DegreeFK" >
+			<option disabled selected>-- Select Degree --</option>
+			</select>
+			<label asp-for="Input.Student.DegreeFK">degree</label>
+			<span asp-validation-for="Input.Student.DegreeFK" class="text-danger"></span>
+		</div>
 	</div>
 </div>
 

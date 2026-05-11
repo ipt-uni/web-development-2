@@ -42,6 +42,6 @@ namespace lab2.Data.Model
         /// attribute to work as FK between the MyUser table
         /// and the Authentication table
         /// </summary>
-        //        public string UserID { get; set; } = null!;
+        public string UserID { get; set; } = null!;
     }
 }

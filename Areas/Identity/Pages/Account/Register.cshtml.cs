@@ -10,12 +10,15 @@ using System.Text;
 using System.Text.Encodings.Web;
 using System.Threading;
 using System.Threading.Tasks;
+using lab2.Data;
+using lab2.Data.Model;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
 
@@ -29,8 +32,10 @@ namespace lab2.Areas.Identity.Pages.Account
         private readonly IUserEmailStore<IdentityUser> _emailStore;
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
+        private ApplicationDbContext _context;
 
         public RegisterModel(
+            ApplicationDbContext context,
             UserManager<IdentityUser> userManager,
             IUserStore<IdentityUser> userStore,
             SignInManager<IdentityUser> signInManager,
@@ -38,6 +43,7 @@ namespace lab2.Areas.Identity.Pages.Account
             IEmailSender emailSender
         )
         {
+            _context = context;
             _userManager = userManager;
             _userStore = userStore;
             _emailStore = GetEmailStore();
@@ -104,10 +110,12 @@ namespace lab2.Areas.Identity.Pages.Account
                 ErrorMessage = "The password and confirmation password do not match."
             )]
             public string ConfirmPassword { get; set; } = "";
+            public Student Student { get; set; }
         }
 
         public async Task OnGetAsync(string returnUrl = null)
         {
+            ViewData["DegreeFK"] = new SelectList(_context.Degrees, "Id", "Name");
             ReturnUrl = returnUrl;
             ExternalLogins = (
                 await _signInManager.GetExternalAuthenticationSchemesAsync()
