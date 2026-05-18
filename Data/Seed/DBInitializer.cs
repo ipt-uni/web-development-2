@@ -56,6 +56,17 @@ namespace lab2.Data.Seed
 
             if (!dbContext.Users.Any())
             {
+                var user0 = new IdentityUser
+                {
+                    UserName = "i@ipt.pt",
+                    NormalizedUserName = "I@IPT.PT",
+                    Email = "i@ipt.pt",
+                    NormalizedEmail = "I@IPT.PT",
+                    EmailConfirmed = true,
+                    SecurityStamp = "9RPZEF6S6W6IU4M341XNLT4NN5ROXGRU",
+                    ConcurrencyStamp = "c86d8254-dd50-44be-8561-d2d94d4bb22f"
+                };
+                user0.PasswordHash = hasher.HashPassword(user0, "dummy");
                 var user1 = new IdentityUser
                 {
                     UserName = "joao.mendes@ipt.pt",
@@ -92,7 +103,7 @@ namespace lab2.Data.Seed
                 };
                 user3.PasswordHash = hasher.HashPassword(user3, "Aa0_aa");
 
-                users = new[] { user1, user2, user3 };
+                users = new[] { user0, user1, user2, user3 };
                 await dbContext.Users.AddRangeAsync(users);
 
 
