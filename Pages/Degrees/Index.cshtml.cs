@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using lab2.Data;
 using lab2.Data.Model;
+using Microsoft.AspNetCore.Authorization;
 
 namespace lab2.Pages.Degrees
 {
@@ -19,7 +20,7 @@ namespace lab2.Pages.Degrees
             _context = context;
         }
 
-        public IList<Degree> Degree { get;set; } = default!;
+        public IList<Degree> Degree { get; set; } = default!;
 
         public async Task OnGetAsync()
         {
