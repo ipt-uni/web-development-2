@@ -2,6 +2,7 @@
 using lab2.Data;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using lab2.Data.Seed;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -27,6 +28,11 @@ builder
     })
     .AddEntityFrameworkStores<ApplicationDbContext>();
 builder.Services.AddRazorPages();
+// Configure the use of IdentityUser as the authentication 'user'
+// // If '.AddRoles' is not added to the instruction, it is not possible to use ROLES
+// builder.Services.AddDefaultIdentity(... )
+//     .AddRoles()...
+//
 
 builder.Services.AddSession(options =>
 {
@@ -42,6 +48,7 @@ var app = builder.Build();
 if (app.Environment.IsDevelopment())
 {
     app.UseMigrationsEndPoint();
+    app.UseItToSeedSqlServer();
 }
 else
 {
@@ -50,6 +57,12 @@ else
     app.UseHsts();
 }
 
+// Create a folder named 'Seed' inside the 'Data' folder
+// Inside it, create two classes whose content is defined below
+
+// In the 'Program.cs' file (existing in the app root), inside the section 'if(app.Environment.IsDevelopment()){'
+// Add the following instruction:
+// Invoke the DB seed
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 
