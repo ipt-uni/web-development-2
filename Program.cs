@@ -25,14 +25,15 @@ builder
         options.Password.RequireUppercase = false;
         options.Password.RequiredLength = 0;
         options.Password.RequireLowercase = false;
+        // options.SignIn.RequireConfirmedAccount = true;
     })
-    .AddEntityFrameworkStores<ApplicationDbContext>();
+    .AddEntityFrameworkStores<ApplicationDbContext>()
+  .AddRoles<IdentityRole>()
+  .AddEntityFrameworkStores<ApplicationDbContext>();
 builder.Services.AddRazorPages();
 // Configure the use of IdentityUser as the authentication 'user'
 // // If '.AddRoles' is not added to the instruction, it is not possible to use ROLES
-// builder.Services.AddDefaultIdentity(... )
-//     .AddRoles()...
-//
+
 
 builder.Services.AddSession(options =>
 {
@@ -57,12 +58,6 @@ else
     app.UseHsts();
 }
 
-// Create a folder named 'Seed' inside the 'Data' folder
-// Inside it, create two classes whose content is defined below
-
-// In the 'Program.cs' file (existing in the app root), inside the section 'if(app.Environment.IsDevelopment()){'
-// Add the following instruction:
-// Invoke the DB seed
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 

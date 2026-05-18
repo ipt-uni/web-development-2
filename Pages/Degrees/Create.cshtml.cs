@@ -4,12 +4,14 @@ using System.Linq;
 using System.Threading.Tasks;
 using lab2.Data;
 using lab2.Data.Model;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace lab2.Pages.Degrees
 {
+    [Authorize(Roles = "Professor,Admin")]
     public class CreateModel : PageModel
     {
         private readonly lab2.Data.ApplicationDbContext _context;
