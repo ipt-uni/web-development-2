@@ -29,13 +29,16 @@ namespace lab2.Pages.Degrees
             {
                 return NotFound();
             }
-
-            var degree =  await _context.Degrees.FirstOrDefaultAsync(m => m.Id == id);
+            var degree = await _context.Degrees.FirstOrDefaultAsync(m => m.Id == id);
             if (degree == null)
             {
                 return NotFound();
             }
             Degree = degree;
+            HttpContext.Session.SetInt32("DegreeId", Degree.Id);
+            // if you are using MVC,
+            // you  can store also the name of your action
+            HttpContext.Session.SetString("ActionName", "Degree/Edit");
             return Page();
         }
 
@@ -43,6 +46,19 @@ namespace lab2.Pages.Degrees
         // For more details, see https://aka.ms/RazorPagesCRUD.
         public async Task<IActionResult> OnPostAsync()
         {
+            var degreeId = HttpContext.Session.GetInt32("DegreeId");
+            var actionName = HttpContext.Session.GetString("ActionName");
+            if (degreeId == null || actionName == null)
+            {
+                ModelState.AddModelError(String.Empty, "Session expired. Please refresh the page.");
+                return Page();
+            }
+            if (degreeId != Degree.Id || actionName != "Degree/Edit")
+            {
+                // it means the User is trying to harm the system by changing data.
+                ModelState.AddModelError(String.Empty, "Session expired. Please refresh the page.");
+                return RedirectToPage("./Index");
+            }
             if (!ModelState.IsValid)
             {
                 return Page();
