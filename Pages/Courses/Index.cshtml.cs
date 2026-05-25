@@ -19,12 +19,15 @@ namespace lab2.Pages.Courses
             _context = context;
         }
 
-        public IList<Course> Course { get;set; } = default!;
+        public IList<Course> Course { get; set; } = default!;
 
         public async Task OnGetAsync()
         {
             Course = await _context.Courses
-                .Include(c => c.Degree).ToListAsync();
+                .Include(c => c.Degree)
+                .Include(a => a.ProfessorsList)
+                .Include(c => c.RegistrationsList)
+                .ToListAsync();
         }
     }
 }
